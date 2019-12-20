@@ -135,7 +135,7 @@ class VispyBaseLayer(ABC):
         self.scale = [
             self.layer.scale[d] for d in self.layer.dims.displayed[::-1]
         ]
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
 
@@ -144,31 +144,35 @@ class VispyBaseLayer(ABC):
             self.layer.translate[d] + self.layer.translate_grid[d]
             for d in self.layer.dims.displayed[::-1]
         ]
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
 
-    def _transform_position(self, position):
-        """Transform cursor position from canvas space (x, y) into image space.
+    def _transform_cursor_position_canvas2worldslice(
+        self, cursor_position_canvas
+    ):
+        """Transform cursor position from canvas space (x, y) to world slice.
 
         Parameters
         -------
-        position : 2-tuple
+        cursor_position_canvas : 2-tuple
             Cursor position in canvase (x, y).
 
         Returns
         -------
         coords : tuple
-            Coordinates of cursor in image space for displayed dimensions only
+            Coordinates of cursor in world slice space for displayed dimensions only
         """
         if self.node.canvas is not None:
             transform = self.node.canvas.scene.node_transform(self.node)
             # Map and offset position so that pixel center is at 0
-            mapped_position = (
-                transform.map(list(position))[: len(self.layer.dims.displayed)]
+            mapped_cursor_position_canvas = (
+                transform.map(list(cursor_position_canvas))[
+                    : len(self.layer.dims.displayed)
+                ]
                 - 0.5
             )
-            coords = tuple(mapped_position[::-1])
+            coords = tuple(mapped_cursor_position_canvas[::-1])
         else:
             coords = (0,) * len(self.layer.dims.displayed)
         return coords
@@ -185,7 +189,7 @@ class VispyBaseLayer(ABC):
         if event.pos is None:
             return
         self._cursor_position_canvas = list(event.pos)
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
         self.layer.on_mouse_move(event)
@@ -196,7 +200,7 @@ class VispyBaseLayer(ABC):
         if event.pos is None:
             return
         self._cursor_position_canvas = list(event.pos)
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
         self.layer.on_mouse_press(event)
@@ -207,7 +211,7 @@ class VispyBaseLayer(ABC):
         if event.pos is None:
             return
         self._cursor_position_canvas = list(event.pos)
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
         self.layer.on_mouse_release(event)

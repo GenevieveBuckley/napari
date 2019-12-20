@@ -147,7 +147,7 @@ class VispyImageLayer(VispyBaseLayer):
         ]
         if self.layer.is_pyramid:
             self.layer.top_left = self.find_top_left()
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
 
@@ -158,7 +158,7 @@ class VispyImageLayer(VispyBaseLayer):
             + self.layer.translate_grid[d]
             for d in self.layer.dims.displayed[::-1]
         ]
-        self.layer.position = self._transform_position(
+        self.layer.position = self._transform_cursor_position_canvas2worldslice(
             self._cursor_position_canvas
         )
 
