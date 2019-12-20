@@ -142,7 +142,7 @@ class Layer(KeymapMixin, ABC):
         self._translate_view = np.zeros(ndim)
         self._translate_grid = np.zeros(ndim)
         self.coordinates = (0,) * ndim
-        self._position = (0,) * self.dims.ndisplay
+        self._cursor_position_canvas = (0,) * self.dims.ndisplay
         self.is_pyramid = False
         self._editable = True
 
@@ -321,13 +321,13 @@ class Layer(KeymapMixin, ABC):
     @property
     def position(self):
         """tuple of int: Cursor position in image of displayed dimensions."""
-        return self._position
+        return self._cursor_position_canvas
 
     @position.setter
     def position(self, position):
-        if self._position == position:
+        if self._cursor_position_canvas == position:
             return
-        self._position = position
+        self._cursor_position_canvas = position
         self._update_coordinates()
 
     def _update_dims(self):
@@ -339,11 +339,13 @@ class Layer(KeymapMixin, ABC):
         # is becoming smaller trim the property from the beginning, and if
         # the number of dimensions is becoming larger pad from the beginning
         if len(self.position) > ndisplay:
-            self._position = self._position[-ndisplay:]
+            self._cursor_position_canvas = self._cursor_position_canvas[
+                -ndisplay:
+            ]
         elif len(self.position) < ndisplay:
-            self._position = (0,) * (ndisplay - len(self.position)) + tuple(
-                self.position
-            )
+            self._cursor_position_canvas = (0,) * (
+                ndisplay - len(self.position)
+            ) + tuple(self.position)
         if len(self.scale) > ndim:
             self._scale = self._scale[-ndim:]
         elif len(self.scale) < ndim:

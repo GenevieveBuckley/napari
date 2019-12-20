@@ -50,7 +50,7 @@ class VispyBaseLayer(ABC):
         self.MAX_TEXTURE_SIZE_2D = MAX_TEXTURE_SIZE_2D
         self.MAX_TEXTURE_SIZE_3D = MAX_TEXTURE_SIZE_3D
 
-        self._position = (0,) * self.layer.dims.ndisplay
+        self._cursor_position_canvas = (0,) * self.layer.dims.ndisplay
         self.camera = None
 
         self.layer.events.refresh.connect(lambda e: self.node.update())
@@ -135,14 +135,18 @@ class VispyBaseLayer(ABC):
         self.scale = [
             self.layer.scale[d] for d in self.layer.dims.displayed[::-1]
         ]
-        self.layer.position = self._transform_position(self._position)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
 
     def _on_translate_change(self):
         self.translate = [
             self.layer.translate[d] + self.layer.translate_grid[d]
             for d in self.layer.dims.displayed[::-1]
         ]
-        self.layer.position = self._transform_position(self._position)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
 
     def _transform_position(self, position):
         """Transform cursor position from canvas space (x, y) into image space.
@@ -180,8 +184,10 @@ class VispyBaseLayer(ABC):
         """Called whenever mouse moves over canvas."""
         if event.pos is None:
             return
-        self._position = list(event.pos)
-        self.layer.position = self._transform_position(self._position)
+        self._cursor_position_canvas = list(event.pos)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
         self.layer.on_mouse_move(event)
 
     def on_mouse_press(self, event):
@@ -189,8 +195,10 @@ class VispyBaseLayer(ABC):
         """
         if event.pos is None:
             return
-        self._position = list(event.pos)
-        self.layer.position = self._transform_position(self._position)
+        self._cursor_position_canvas = list(event.pos)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
         self.layer.on_mouse_press(event)
 
     def on_mouse_release(self, event):
@@ -198,8 +206,10 @@ class VispyBaseLayer(ABC):
         """
         if event.pos is None:
             return
-        self._position = list(event.pos)
-        self.layer.position = self._transform_position(self._position)
+        self._cursor_position_canvas = list(event.pos)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
         self.layer.on_mouse_release(event)
 
     def on_draw(self, event):

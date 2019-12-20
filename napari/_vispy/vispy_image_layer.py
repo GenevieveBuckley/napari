@@ -147,7 +147,9 @@ class VispyImageLayer(VispyBaseLayer):
         ]
         if self.layer.is_pyramid:
             self.layer.top_left = self.find_top_left()
-        self.layer.position = self._transform_position(self._position)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
 
     def _on_translate_change(self):
         self.translate = [
@@ -156,7 +158,9 @@ class VispyImageLayer(VispyBaseLayer):
             + self.layer.translate_grid[d]
             for d in self.layer.dims.displayed[::-1]
         ]
-        self.layer.position = self._transform_position(self._position)
+        self.layer.position = self._transform_position(
+            self._cursor_position_canvas
+        )
 
     def compute_data_level(self, size):
         """Computed what level of the pyramid should be viewed given the
