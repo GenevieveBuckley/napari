@@ -351,6 +351,26 @@ frag_dict = {
 
 # Custom volume class is needed for better 3D rendering
 class Volume(BaseVolume):
+    """#TODO
+
+    Parameters
+    ----------
+    #TODO : #TODO
+        #TODO
+
+    Attributes
+    ----------
+    #TODO
+        #TODO
+
+    Raises
+    ------
+    ValueError
+        #TODO
+    ValueError
+        #TODO
+    """
+
     _interpolation_names = ['linear', 'nearest']
 
     def __init__(self, *args, **kwargs):
@@ -378,6 +398,13 @@ class Volume(BaseVolume):
 
     @method.setter
     def method(self, method):
+        """#TODO
+
+        Parameters
+        ----------
+        method : #TODO, optional
+            #TODO, by default None
+        """
         # Check and save
         known_methods = list(frag_dict.keys())
         if method not in known_methods:
@@ -407,6 +434,13 @@ class Volume(BaseVolume):
 
     @threshold.setter
     def threshold(self, value):
+        """#TODO
+
+        Parameters
+        ----------
+        value : #TODO, optional
+            #TODO, by default None
+        """
         self._threshold = float(value)
         if 'u_threshold' in self.shared_program:
             self.shared_program['u_threshold'] = self._threshold
@@ -414,10 +448,18 @@ class Volume(BaseVolume):
 
     @property
     def interpolation(self):
+        """#TODO"""
         return self._interpolation
 
     @interpolation.setter
     def interpolation(self, interp):
+        """#TODO
+
+        Parameters
+        ----------
+        interp : #TODO, optional
+            #TODO, by default None
+        """
         if interp not in self._interpolation_names:
             raise ValueError(
                 "interpolation must be one of %s"

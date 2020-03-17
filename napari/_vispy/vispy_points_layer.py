@@ -8,6 +8,8 @@ from ..utils.colormaps.standardize_color import transform_color
 
 
 class VispyPointsLayer(VispyBaseLayer):
+    """#TODO"""
+
     _highlight_color = (0, 0.6, 1)
     _highlight_width = 5
 
@@ -29,6 +31,13 @@ class VispyPointsLayer(VispyBaseLayer):
         self._on_data_change()
 
     def _on_display_change(self):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         parent = self.node.parent
         self.node.transforms = ChainTransform()
         self.node.parent = None
@@ -41,6 +50,13 @@ class VispyPointsLayer(VispyBaseLayer):
         self._reset_base()
 
     def _on_data_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         # Check if ndisplay has changed current node type needs updating
         if (
             self.layer.dims.ndisplay == 3 and len(self.node._subvisuals) != 2
@@ -81,6 +97,13 @@ class VispyPointsLayer(VispyBaseLayer):
         self.node.update()
 
     def _on_highlight_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if len(self.layer._highlight_index) > 0:
             # Color the hovered or selected points
             data = self.layer._view_data[self.layer._highlight_index]

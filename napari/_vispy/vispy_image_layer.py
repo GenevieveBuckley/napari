@@ -18,6 +18,39 @@ texture_dtypes = [
 
 
 class VispyImageLayer(VispyBaseLayer):
+    """#TODO
+
+    Parameters
+    ----------
+    layer : napari.layers.Image
+        Image layer model.
+
+    Attributes
+    ----------
+    layer : napari.layers.Image
+        Image layer model.
+    node : vispy.scene.VisualNode
+        Central node with which to interact with the visual.
+    scale : sequence of float
+        Scale factors for the layer visual in the scenecanvas.
+    translate : sequence of float
+        Translation values for the layer visual in the scenecanvas.
+    scale_factor : float
+        Conversion factor from canvas coordinates to image coordinates, which
+        depends on the current zoom level.
+    MAX_TEXTURE_SIZE_2D : int
+        Max texture size allowed by the vispy canvas during 2D rendering.
+    MAX_TEXTURE_SIZE_3D : int
+        Max texture size allowed by the vispy canvas during 2D rendering.
+
+    Raises
+    ------
+    TypeError
+        #TODO
+    ValueError
+        #TODO
+    """
+
     def __init__(self, layer):
         node = ImageNode(None, method='auto')
         super().__init__(layer, node)
@@ -36,6 +69,13 @@ class VispyImageLayer(VispyBaseLayer):
         self._on_data_change()
 
     def _on_display_change(self, data=None):
+        """#TODO
+
+        Parameters
+        ----------
+        data : #TODO, optional
+            #TODO, by default None
+        """
         parent = self.node.parent
         self.node.parent = None
 
@@ -50,6 +90,13 @@ class VispyImageLayer(VispyBaseLayer):
         self.reset()
 
     def _on_data_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         data = self.layer._data_view
         dtype = np.dtype(data.dtype)
         if dtype not in texture_dtypes:
@@ -96,6 +143,13 @@ class VispyImageLayer(VispyBaseLayer):
         self.node.update()
 
     def _on_interpolation_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if self.layer.dims.ndisplay == 3 and isinstance(self.layer, Labels):
             self.node.interpolation = 'nearest'
         elif self.layer.dims.ndisplay == 3 and isinstance(self.layer, Image):
@@ -104,11 +158,25 @@ class VispyImageLayer(VispyBaseLayer):
             self.node.interpolation = self.layer.interpolation
 
     def _on_rendering_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if self.layer.dims.ndisplay == 3:
             self.node.method = self.layer.rendering
             self._on_threshold_change()
 
     def _on_colormap_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         cmap = self.layer.colormap[1]
         if self.layer.gamma != 1:
             # when gamma!=1, we instantiate a new colormap
@@ -123,15 +191,36 @@ class VispyImageLayer(VispyBaseLayer):
         self.node.cmap = cmap
 
     def _on_contrast_limits_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if self.layer.dims.ndisplay == 2:
             self.node.clim = self.layer.contrast_limits
         else:
             self._on_data_change()
 
     def _on_gamma_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         self._on_colormap_change()
 
     def _on_threshold_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if self.layer.dims.ndisplay == 2:
             return
         rendering = self.layer.rendering
@@ -152,7 +241,7 @@ class VispyImageLayer(VispyBaseLayer):
             Requested size of field of view in image coordinates
 
         Returns
-        ----------
+        -------
         level : int
             Level of the pyramid to be viewing.
         """
@@ -178,7 +267,7 @@ class VispyImageLayer(VispyBaseLayer):
         pan and zoom position
 
         Returns
-        ----------
+        -------
         top_left : tuple of int
             Coordinates of top left pixel.
         """
@@ -211,6 +300,11 @@ class VispyImageLayer(VispyBaseLayer):
     def on_draw(self, event):
         """Called whenever the canvas is drawn, which happens whenever new
         data is sent to the canvas or the camera is moved.
+
+        Parameters
+        ----------
+        event : #TODO
+            #TODO
         """
         self.layer.scale_factor = self.scale_factor
         if self.layer.is_pyramid:
@@ -224,6 +318,13 @@ class VispyImageLayer(VispyBaseLayer):
                 self.layer.top_left = self.find_top_left()
 
     def reset(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         self._reset_base()
         self._on_interpolation_change()
         self._on_colormap_change()

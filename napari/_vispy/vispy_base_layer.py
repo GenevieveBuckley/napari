@@ -83,6 +83,13 @@ class VispyBaseLayer(ABC):
 
     @order.setter
     def order(self, order):
+        """#TODO
+
+        Parameters
+        ----------
+        order : #TODO
+            #TODO
+        """
         self.node.order = order
 
     @property
@@ -92,6 +99,13 @@ class VispyBaseLayer(ABC):
 
     @scale.setter
     def scale(self, scale):
+        """#TODO
+
+        Parameters
+        ----------
+        scale : #TODO
+            #TODO
+        """
         self._master_transform.scale = scale
 
     @property
@@ -101,6 +115,13 @@ class VispyBaseLayer(ABC):
 
     @translate.setter
     def translate(self, translate):
+        """#TODO
+
+        Parameters
+        ----------
+        translate : #TODO
+            #TODO
+        """
         self._master_transform.translate = translate
 
     @property
@@ -114,19 +135,54 @@ class VispyBaseLayer(ABC):
 
     @abstractmethod
     def _on_data_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional.
+            #TODO, by default None.
+        """
         raise NotImplementedError()
 
     def _on_visible_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional.
+            #TODO, by Default None.
+        """
         self.node.visible = self.layer.visible
 
     def _on_opacity_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional.
+            #TODO, by default None.
+        """
         self.node.opacity = self.layer.opacity
 
     def _on_blending_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional.
+            #TODO, by default None.
+        """
         self.node.set_gl_state(self.layer.blending)
         self.node.update()
 
     def _on_scale_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional.
+            #TODO, by default None.
+        """
         self.scale = [
             self.layer.scale[d] * self.layer._scale_view[d]
             for d in self.layer.dims.displayed[::-1]
@@ -136,6 +192,13 @@ class VispyBaseLayer(ABC):
         self.layer.position = self._transform_position(self._position)
 
     def _on_translate_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional.
+            #TODO, by default None.
+        """
         self.translate = [
             self.layer.translate[d]
             + self.layer._translate_view[d]
@@ -170,6 +233,7 @@ class VispyBaseLayer(ABC):
         return coords
 
     def _reset_base(self):
+        """#TODO"""
         self._on_visible_change()
         self._on_opacity_change()
         self._on_blending_change()
@@ -177,7 +241,13 @@ class VispyBaseLayer(ABC):
         self._on_translate_change()
 
     def on_mouse_move(self, event):
-        """Called whenever mouse moves over canvas."""
+        """Called whenever mouse moves over canvas.
+
+        Parameters
+        ----------
+        event : #TODO
+            #TODO
+        """
         if event.pos is None:
             return
         self._position = list(event.pos)
@@ -186,6 +256,11 @@ class VispyBaseLayer(ABC):
 
     def on_mouse_press(self, event):
         """Called whenever mouse pressed in canvas.
+
+        Parameters
+        ----------
+        event : #TODO
+            #TODO
         """
         if event.pos is None:
             return
@@ -195,6 +270,11 @@ class VispyBaseLayer(ABC):
 
     def on_mouse_release(self, event):
         """Called whenever mouse released in canvas.
+
+        Parameters
+        ----------
+        event : #TODO
+            #TODO
         """
         if event.pos is None:
             return
@@ -204,6 +284,11 @@ class VispyBaseLayer(ABC):
 
     def on_draw(self, event):
         """Called whenever the canvas is drawn.
+
+        Parameters
+        ----------
+        event : #TODO
+            #TODO
         """
         self.layer.scale_factor = self.scale_factor
 

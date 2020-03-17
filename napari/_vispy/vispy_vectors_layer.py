@@ -4,6 +4,23 @@ import numpy as np
 
 
 class VispyVectorsLayer(VispyBaseLayer):
+    """#TODO
+
+    Parameters
+    ----------
+    layer : napari.layers.Vectors
+        Vector layer model.
+
+    Attributes
+    ----------
+    layer : napari.layers.Vectors
+        Vector layer model.
+    node : #TODO
+        #TODO
+    #TODO : #TODO
+        #TODO
+    """
+
     def __init__(self, layer):
         node = Mesh()
         super().__init__(layer, node)
@@ -13,6 +30,13 @@ class VispyVectorsLayer(VispyBaseLayer):
         self._on_data_change()
 
     def _on_data_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if (
             len(self.layer._view_vertices) == 0
             or len(self.layer._view_faces) == 0

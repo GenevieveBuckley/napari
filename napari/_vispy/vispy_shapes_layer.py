@@ -4,6 +4,8 @@ import numpy as np
 
 
 class VispyShapesLayer(VispyBaseLayer):
+    """#TODO"""
+
     def __init__(self, layer):
         # Create a compound visual with the following four subvisuals:
         # Markers: corresponding to the vertices of the interaction box or the
@@ -26,6 +28,13 @@ class VispyShapesLayer(VispyBaseLayer):
         self._on_highlight_change()
 
     def _on_data_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         faces = self.layer._data_view._mesh.displayed_triangles
         colors = self.layer._data_view._mesh.displayed_triangles_colors
         vertices = self.layer._data_view._mesh.vertices
@@ -49,6 +58,13 @@ class VispyShapesLayer(VispyBaseLayer):
         self.node.update()
 
     def _on_highlight_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         # Compute the vertices and faces of any shape outlines
         vertices, faces = self.layer._outline_shapes()
 
@@ -100,4 +116,11 @@ class VispyShapesLayer(VispyBaseLayer):
         )
 
     def _on_opacity_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         pass

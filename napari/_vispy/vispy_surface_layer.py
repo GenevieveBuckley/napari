@@ -10,6 +10,18 @@ class VispySurfaceLayer(VispyBaseLayer):
     View is based on the vispy mesh node and uses default values for
     lighting direction and lighting color. More information can be found
     here https://github.com/vispy/vispy/blob/master/vispy/visuals/mesh.py
+
+    Parameters
+    ----------
+    layer : napari.layers.Surface
+        Surface layer model.
+
+    Attributes
+    ----------
+    layer : napari.layers.Surface
+        Surface layer model.
+    #TODO : #TODO
+        #TODO
     """
 
     def __init__(self, layer):
@@ -27,6 +39,13 @@ class VispySurfaceLayer(VispyBaseLayer):
         self._on_data_change()
 
     def _on_data_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         if len(self.layer._data_view) == 0 or len(self.layer._view_faces) == 0:
             vertices = None
             faces = None
@@ -49,6 +68,13 @@ class VispySurfaceLayer(VispyBaseLayer):
         self.node.update()
 
     def _on_colormap_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         cmap = self.layer.colormap[1]
         if self.layer.gamma != 1:
             # when gamma!=1, we instantiate a new colormap with 256 control
@@ -61,12 +87,33 @@ class VispySurfaceLayer(VispyBaseLayer):
         self.node.cmap = cmap
 
     def _on_contrast_limits_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         self.node.clim = self.layer.contrast_limits
 
     def _on_gamma_change(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         self._on_colormap_change()
 
     def reset(self, event=None):
+        """#TODO
+
+        Parameters
+        ----------
+        event : #TODO, optional
+            #TODO, by default None
+        """
         self._reset_base()
         self._on_colormap_change()
         self._on_contrast_limits_change()
