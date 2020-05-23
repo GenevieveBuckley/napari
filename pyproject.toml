@@ -37,7 +37,7 @@ author_email = "jane@example.com"
 [tool.briefcase.app.napari]
 formal_name = "napari"
 description = "napari: a multi-dimensional image viewer"
-icon = "src/hellopyside/resources/napari"
+icon = "napari/resources/logo"
 sources = ['napari']
 requires = [
     'pyside2==5.13.0',
