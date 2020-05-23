@@ -4,7 +4,7 @@ import re
 from glob import glob
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
-from ..types import FullLayerData
+from ..naparitypes import FullLayerData
 
 import numpy as np
 from dask import array as da

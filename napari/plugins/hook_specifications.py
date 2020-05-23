@@ -37,7 +37,7 @@ For more general background on the plugin hook calling mechanism, see the
 
 from napari_plugin_engine import napari_hook_specification
 from typing import Optional, Union, List, Any
-from ..types import ReaderFunction, WriterFunction
+from ..naparitypes import ReaderFunction, WriterFunction
 
 
 # -------------------------------------------------------------------------- #

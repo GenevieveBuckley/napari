@@ -9,7 +9,7 @@ from napari_plugin_engine import (
 )
 
 from ..layers import Layer
-from ..types import LayerData
+from ..naparitypes import LayerData
 from ..utils.misc import abspath_or_url
 from . import plugin_manager as napari_plugin_manager
 

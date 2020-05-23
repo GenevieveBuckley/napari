@@ -4,7 +4,7 @@ from typing import Tuple, List
 import numpy as np
 from vispy.color import BaseColormap, Colormap, get_colormap, get_colormaps
 
-from ...types import ValidColormapArg
+from ...naparitypes import ValidColormapArg
 from .vendored import cm, colorconv
 
 _matplotlib_list_file = os.path.join(

@@ -7,7 +7,7 @@ import numpy as np
 from vispy.color.colormap import Colormap
 
 from ...utils.colormaps import ensure_colormap_tuple
-from ...types import ValidColormapArg
+from ...naparitypes import ValidColormapArg
 
 from ..base import Layer
 from ...utils.event import Event

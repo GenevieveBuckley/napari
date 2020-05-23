@@ -8,7 +8,7 @@ from typing import Any, List, Optional, Union
 import numpy as np
 from napari_plugin_engine import napari_hook_implementation
 
-from ..types import (
+from ..naparitypes import (
     LayerData,
     FullLayerData,
     ReaderFunction,
@@ -298,7 +298,7 @@ def write_layer_data_with_plugins(
     ----------
     path : str
         path to file/directory
-    layer_data : list of napari.types.LayerData
+    layer_data : list of napari.naparitypes.LayerData
         List of layer_data, where layer_data is ``(data, meta, layer_type)``.
     plugin_name : str, optional
         Name of the plugin to use for saving. If None then all plugins

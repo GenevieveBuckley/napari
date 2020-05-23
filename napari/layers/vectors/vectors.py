@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple, Union
 import numpy as np
 from vispy.color.colormap import Colormap
 
-from ...types import ValidColormapArg
+from ...naparitypes import ValidColormapArg
 from ...utils.colormaps import ensure_colormap_tuple
 from ...utils.event import Event
 from ...utils.status_messages import format_float

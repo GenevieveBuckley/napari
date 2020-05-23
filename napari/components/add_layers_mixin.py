@@ -10,7 +10,7 @@ import numpy as np
 from .. import layers
 from ..layers.image._image_utils import guess_labels, guess_multiscale
 from ..plugins.io import read_data_with_plugins
-from ..types import FullLayerData, LayerData
+from ..naparitypes import FullLayerData, LayerData
 from ..utils import colormaps
 from ..utils.colormaps import ensure_colormap_tuple
 from ..utils.misc import (
