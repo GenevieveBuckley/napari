@@ -32,7 +32,6 @@ version = "0.3.0"
 url = "https://napari.org/"
 license = "BSD license"
 author = 'napari development team'
-author_email = "jane@example.com"
 
 [tool.briefcase.app.napari]
 formal_name = "napari"
