@@ -37,7 +37,6 @@ icon = "napari/resources/logo"
 sources = ['napari']
 requires = [
     'pip',
-    'virtualenv',
     'pyside2==5.13.0',
     'dask[array]>=2.1.0',
     'cachey>=0.2.1',  # for dask opportunistic caching
