@@ -22,9 +22,6 @@ exclude = '''
 )
 '''
 
-[build-system]
-requires = ["briefcase", "setuptools", "wheel"]
-
 [tool.briefcase]
 project_name = "napari"
 bundle = "org.napari"
