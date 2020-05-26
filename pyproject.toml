@@ -25,7 +25,7 @@ exclude = '''
 [tool.briefcase]
 project_name = "napari"
 bundle = "com.example"
-version = ""  # Placeholder string, overwritten by version number in CI builds
+version = "0.0.0"  # Placeholder overwritten by version number in CI builds
 url = "https://napari.org/"
 license = "BSD license"
 author = 'napari development team'
