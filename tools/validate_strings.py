@@ -88,7 +88,10 @@ class FindTransStrings(ast.NodeVisitor):
         # determine which one is used.
         for idx, arg in enumerate(args):
             found_vars = set()
-            check_arg = arg[:]
+            if isinstance(arg, ast.Name):
+                check_arg = arg.id
+            else:
+                check_arg = arg[:]
             check_kwargs = {}
             while True:
                 try:
@@ -396,6 +399,8 @@ def find_trans_strings(
     trans_strings = {}
     show_trans_strings.visit(module)
     for string in show_trans_strings._found:
+        if isinstance(string, ast.Name):
+            string = string.id
         key = ' '.join(list(string.split()))
         trans_strings[key] = string
 
