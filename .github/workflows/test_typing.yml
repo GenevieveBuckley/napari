@@ -23,4 +23,6 @@ jobs:
           pip install tox
 
       - name: Run mypy on typed modules
-        run: tox -e mypy
+        run: |
+          tree
+          tox -e mypy
